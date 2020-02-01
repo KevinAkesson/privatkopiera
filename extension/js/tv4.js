@@ -35,7 +35,11 @@ function tv4play_asset_callback() {
   }
 
   var data = JSON.parse(this.responseText)
-  update_filename(`${data.metadata.title}.mp4`)
+  var season_number = (`${data.metadata.seasonNumber}`)
+  var episode_number = (`${data.metadata.episodeNumber}`)
+  if (season_number <= 9) season_number = (`0${season_number}`)
+  if (episode_number <= 9) episode_number = (`0${episode_number}`)
+  update_filename(`${data.metadata.seriesTitle} S${season_number}E${episode_number}.mp4`)
 
   var media_url = `https://playback-api.b17g.net${data.mediaUri}`
   console.log(media_url)
